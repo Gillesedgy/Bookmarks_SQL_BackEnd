@@ -14,5 +14,29 @@ const getAllBookmarks = async () => {
   }
  
 };
+//! DAY II 
+// GET ONE BO)OKMARK
+// make a call using pg promise 
+const getBookmark = async (id)=>{
+try {
+  const oneBookmark = await db.one('SELECT * FROM bookmarks WHERE id=$1', id)
+  return oneBookmark
+} catch (error) {
+  return error
+}
+}
+// CREATE / POST 
+const createBookmark = async (bookmark) => {
+  try {
+    const newBookmark = await db.one(
+      "INSERT INTO bookmarks (name, url, category, is_favorite) VALUES($1, $2, $3, $4) RETURNING *",
+      [bookmark.name, bookmark.url, bookmark.category, bookmark.is_favorite]
+    );
+    return newBookmark;
+  } catch (error) {
+    return error;
+  }
+};
 
-module.exports = { getAllBookmarks };
+
+module.exports = { getAllBookmarks, getBookmark, createBookmark };
