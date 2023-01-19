@@ -10,9 +10,7 @@ const checkName = (req, res, next) => {
 // CHECK FOR IS_FAV
 const checkBoolean = (req, res, next) => {
   //?  To check if the value of req.body.is_favorite is a boolean value
-  //
-
-  const favorite = req.body.is_favorite; 
+ const favorite = req.body.is_favorite; 
   if (typeof favorite === 'boolean' || favorite === undefined)
 
    {

@@ -4,6 +4,7 @@ const {
   getAllBookmarks,
   getBookmark,
   createBookmark,
+  deleteBookmark,
 } = require("../queries/bookmarks");
 const { checkName, checkBoolean } = require("../validations/checkBookmarks.js");
 
@@ -24,10 +25,10 @@ bookmarks.get("/", async (req, res) => {
 bookmarks.get("/:id", async (req, res) => {
   const { id } = req.params;
   const bookmark = await getBookmark(id);
-  if (bookmark) {
+  if (!bookmark.message) {
     res.status(200).json(bookmark);
   } else {
-    res.status(404).json({ error: "not found" });
+    res.status(404).json({ error: "Not found" });
   }
 });
 
@@ -41,6 +42,26 @@ bookmarks.post("/", checkBoolean, checkName, async (req, res) => {
   }
 });
 
-//
+//! DAY III -- UPDATE AND DELETE
+//DELETE
+bookmarks.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  const deletedBookmark = await deleteBookmark(id);
+  if (deletedBookmark.id) {
+    res.status(200).json(deletedBookmark);
+  } else {
+    res.status(404).json("Bookmark ID not found");
+  }
+  //? TRY CATCH ERROR ALTERNATIVE
+  // try {
+  //   const {id} = req.params
+  //   const deletedBookmark = await deleteBookmark(id);
+  //   return res.status(200).json(deletedBookmark);
+  // } catch (error) {
+  //   return error
+  // }
+});
+
+//UPDATE
 
 module.exports = bookmarks;
