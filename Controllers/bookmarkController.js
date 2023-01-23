@@ -1,5 +1,6 @@
 const express = require("express");
 const bookmarks = express.Router();
+
 const {
   getAllBookmarks,
   getBookmark,
@@ -7,6 +8,7 @@ const {
   deleteBookmark,
   updateBookmark,
 } = require("../queries/bookmarks");
+// IMPRTING VALIDATIONS
 const { checkName, checkBoolean, validateURL} = require("../validations/checkBookmarks.js");
 
 // INDEX
@@ -74,7 +76,5 @@ try {
   return res.status(404).json(" Bookmark ID not found");
 }
 })
-
-
 
 module.exports = bookmarks;

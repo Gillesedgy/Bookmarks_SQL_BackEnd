@@ -1,9 +1,10 @@
 //IMPORTS / DEPENDENCIES
 const pgp = require("pg-promise")();
+// ALLOWS US TO ACCESS AND USE ALL .env VARIABLES
 require("dotenv").config();
 
-// All the .env variables
-const cn = {
+// All THE .env VARIABLES
+const cn = { 
   host: process.env.PG_HOST,
   port: process.env.PG_PORT,
   database: process.env.PG_DATABASE,
