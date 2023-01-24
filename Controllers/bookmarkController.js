@@ -1,6 +1,13 @@
 const express = require("express");
 const bookmarks = express.Router();
 
+//! import the reviews controller in the bookmarks controller
+const reviewsController = require("./reviewsController");
+
+//? MIDDLEWARE --> PLACED BEFORE ROUTES
+//! WHEN YOU SEE THIS /:bookmarkId/reviews ,USE THE REVIEWCONTROLLER
+bookmarks.use("/:bookmarkId/reviews", reviewsController);
+
 const {
   getAllBookmarks,
   getBookmark,
@@ -9,11 +16,16 @@ const {
   updateBookmark,
 } = require("../queries/bookmarks");
 // IMPRTING VALIDATIONS
-const { checkName, checkBoolean, validateURL} = require("../validations/checkBookmarks.js");
+const {
+  checkName,
+  checkBoolean,
+  validateURL,
+} = require("../validations/checkBookmarks.js");
 
 // INDEX
 bookmarks.get("/", async (req, res) => {
-  // save the data for all bookmarks to a variable
+
+  // // save the data for all bookmarks to a variable
   const allBookmarks = await getAllBookmarks();
   if (allBookmarks[0]) {
     // send the actual res to the Frontend
@@ -36,7 +48,7 @@ bookmarks.get("/:id", async (req, res) => {
 });
 
 // CREATE ONE BOOKMARK -- POST using try/catch
-bookmarks.post("/", checkBoolean, checkName,validateURL, async (req, res) => {
+bookmarks.post("/", checkBoolean, checkName, validateURL, async (req, res) => {
   try {
     const bookmark = await createBookmark(req.body);
     res.status(200).json(bookmark);
@@ -67,14 +79,20 @@ bookmarks.delete("/:id", async (req, res) => {
 
 // UPDATE
 
-bookmarks.put('/:id', checkName, checkBoolean, validateURL, async (req,res)=>{
-try {
-  const {id} = req.params
-  const updatedBookmark = await updateBookmark(id, req.body)
-  res.status(200).json(updatedBookmark) 
-} catch (error) {
-  return res.status(404).json(" Bookmark ID not found");
-}
-})
+bookmarks.put(
+  "/:id",
+  checkName,
+  checkBoolean,
+  validateURL,
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updatedBookmark = await updateBookmark(id, req.body);
+      res.status(200).json(updatedBookmark);
+    } catch (error) {
+      return res.status(404).json(" Bookmark ID not found");
+    }
+  }
+);
 
 module.exports = bookmarks;

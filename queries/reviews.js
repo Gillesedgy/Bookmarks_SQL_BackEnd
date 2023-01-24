@@ -1,15 +1,20 @@
 const db = require("../db/dbConfig");
 
-const getAllReviews = async () => {
+// GET ALL -- INDEX
+//!
+const getAllReviews = async (bookmark_id) => {
   try {
-    const allReviews = await db.any("SELECT * FROM reviews");
+    const allReviews = await db.any(
+      "SELECT * FROM reviews WHERE bookmark_id=$1",
+      bookmark_id
+    );
     return allReviews;
   } catch (error) {
     return error;
   }
 };
-// Get one Review
 
+// Get one Review -- SHOW
 const getReview = async (id) => {
   try {
     const oneReview = await db.one("SELECT * FROM reviews WHERE id=$1", id);
@@ -19,7 +24,7 @@ const getReview = async (id) => {
   }
 };
 
-// CREATE
+// CREATE -- POST
 const createReview = async (review) => {
   try {
     const newReview = await db.one(
@@ -39,7 +44,6 @@ const createReview = async (review) => {
 };
 
 // DELETE
-
 const deleteReview = async (id) => {
   try {
     const deletedReview = await db.one(
@@ -52,7 +56,7 @@ const deleteReview = async (id) => {
   }
 };
 
-// UPDATE
+// UPDATE -- PUT
 const updateReview = async (id, review) => {
   try {
     const updatedReview = await db.one(
@@ -65,4 +69,10 @@ const updateReview = async (id, review) => {
   }
 };
 
-module.exports = { getAllReviews, getReview, createReview, deleteReview, updateReview };
+module.exports = {
+  getAllReviews,
+  getReview,
+  createReview,
+  deleteReview,
+  updateReview,
+};
