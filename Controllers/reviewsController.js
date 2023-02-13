@@ -68,7 +68,7 @@ reviews.put("/:id", async (req, res) => {
     const updatedReview = await updateReview(id, req.body);
     res.status(200).json(updatedReview);
   } catch (error) {
-    return res.status(404).json(" Review ID not found");
+    return res.status(404).json("Review ID not found");
   }
 });
 

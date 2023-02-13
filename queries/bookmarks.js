@@ -50,7 +50,7 @@ const deleteBookmark = async (id) => {
   }
 };
 
-// UPDATE
+// UPDATE --PUT 
 const updateBookmark = async (id, bookmark) => {
   try {
     const updatedBookmark = await db.one(

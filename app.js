@@ -2,7 +2,7 @@
 const cors = require("cors");
 const express = require("express");
 const bookmarksController = require("./controllers/bookmarkController.js");
-//! REMOVE AFTER USING 
+// TODO: REMOVE AFTER 
 // const reviewsController = require("./controllers/reviewsController.js");
 // CONFIGURATION
 const app = express();
@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 // Bookmarks ROUTES / MIDDLEWARE
 app.use("/bookmarks", bookmarksController);
-//! REMOVED
+// TODO: REMOVE REVIEW ROUTES
 // REVIEWS ROUTE
 // app.use("/reviews", reviewsController);
 

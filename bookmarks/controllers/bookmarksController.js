@@ -8,7 +8,7 @@ const bookmarksArray = require("../models/bookmark");
 bookmarks.get("/", (req, res) => {
   res.json(bookmarksArray);
 });
-// only validates for that specific route --> Bookmarks enpoint for post
+// only validates for that specific route --> Bookmarks endpoint for post
 bookmarks.post("/", validateURL, (req, res) => {
   bookmarksArray.push(req.body);
   res.json(bookmarksArray.at(-1));

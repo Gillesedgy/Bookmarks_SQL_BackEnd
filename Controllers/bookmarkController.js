@@ -15,7 +15,7 @@ const {
   deleteBookmark,
   updateBookmark,
 } = require("../queries/bookmarks");
-// IMPRTING VALIDATIONS
+// IMPORTING VALIDATIONS
 const {
   checkName,
   checkBoolean,
@@ -23,9 +23,9 @@ const {
 } = require("../validations/checkBookmarks.js");
 
 // INDEX
-bookmarks.get("/", async (req, res) => {
 
-  // // save the data for all bookmarks to a variable
+bookmarks.get("/", async (req, res) => {
+  //* save the data for all bookmarks to a variable
   const allBookmarks = await getAllBookmarks();
   if (allBookmarks[0]) {
     // send the actual res to the Frontend
