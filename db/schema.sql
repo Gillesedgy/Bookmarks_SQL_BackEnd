@@ -39,10 +39,10 @@ password TEXT NOT NULL,
 
 -- CREATE A TABLE FOR USERS BOOKAMRKS
 
-DROP TABLE IF EXISTS users_bookmars
+DROP TABLE IF EXISTS users_bookmarks;
 
 CREATE TABLE users_bookmarks(
 created TIMESTAMP WITH TIME ZONE,
 bookmark_id INTEGER,
-user_id
+user_id INTEGER
 );
