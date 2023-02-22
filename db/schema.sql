@@ -41,3 +41,8 @@ password TEXT NOT NULL,
 
 DROP TABLE IF EXISTS users_bookmars
 
+CREATE TABLE users_bookmarks(
+created TIMESTAMP WITH TIME ZONE,
+bookmark_id INTEGER,
+user_id
+);
