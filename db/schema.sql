@@ -3,6 +3,8 @@ CREATE DATABASE bookmarks_dev;
 
 \c bookmarks_dev;
 
+DROP TABLE IF EXISTS bookmarks CASCADE;
+
 CREATE TABLE bookmarks (
  id SERIAL PRIMARY KEY,
  name TEXT NOT NULL,
@@ -25,3 +27,17 @@ CREATE TABLE reviews (
  bookmark_id INTEGER REFERENCES bookmarks (id)--  BOOKAMRKS FOREIGN KEY --> bookmark_id
  ON DELETE CASCADE
 );
+
+--  TABLE FOR USERS 
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+id SERIAL PRIMARY KEY,
+username TEXT UNIQUE NOT NULL,
+password TEXT NOT NULL,
+);
+
+-- CREATE A TABLE FOR USERS BOOKAMRKS
+
+DROP TABLE IF EXISTS users_bookmars
+
